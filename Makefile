@@ -8,11 +8,10 @@ STYLES_DIR := ./styles
 
 # Source and target files
 MD_FILES := $(wildcard $(SRC_DIR)/*.md)
-PLANTUML_FILES := $(wildcard $(IMG_SRC_DIR)/*.plantuml)
+PLANTUML_FILES := $(wildcard $(IMG_SRC_DIR)/*.{plantuml,puml})
 GENERATED_IMG_FILES := $(patsubst $(IMG_SRC_DIR)/%.plantuml,$(IMG_DIR)/%.png,$(PLANTUML_FILES))
 CUSTOM_CSS := $(wildcard $(STYLES_DIR)/*.css)
 OUTPUT := presentation.html
-INTERMEDIATE_PDF := intermediate_presentation.pdf
 PDF_OUTPUT := presentation.pdf
 
 # Pandoc options for reveal.js and PDF output
@@ -45,7 +44,7 @@ serve: $(OUTPUT)
 
 # Clean rule
 clean:
-	rm -f $(OUTPUT) $(PDF_OUTPUT) $(INTERMEDIATE_PDF)
+	rm -f $(OUTPUT) $(PDF_OUTPUT)
 	rm -f $(GENERATED_IMG_FILES)
 
 .PHONY: all pdf serve clean
