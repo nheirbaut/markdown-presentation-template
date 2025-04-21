@@ -1,7 +1,7 @@
 {
 	"name": "Markdown Presentation Template",
 	"build": {
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "./Dockerfile"
 	},
 	"customizations": {
 		"vscode": {
@@ -15,9 +15,5 @@
 				"yzhang.markdown-all-in-one"
 			]
 		}
-	},
-	"features": {
-		"ghcr.io/jungaretti/features/make:1": {},
-		"ghcr.io/devcontainers-extra/features/pandoc:1": {}
 	}
 }
