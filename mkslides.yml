@@ -1,0 +1,3 @@
+slides:
+  theme: white
+  preprocess_script: scripts/process_plantuml.py

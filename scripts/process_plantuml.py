@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import re
 import subprocess
 import sys
@@ -34,12 +33,15 @@ def _render_svg(uml_source: str) -> str:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
+
     svg_bytes, err = proc.communicate(uml_source.encode("utf-8"))
+
     if proc.returncode != 0:
         sys.stderr.write(f"[preprocess_plantuml] PlantUML error: {err.decode()}\n")
         raise RuntimeError("PlantUML CLI failed")
 
     svg_text = svg_bytes.decode("utf-8")
+
     return _strip_xml_declaration(svg_text)
 
 
@@ -48,6 +50,7 @@ def _replace_block(match: re.Match) -> str:
     Callback for re.sub: replaces the UML fenced block with its SVG.
     """
     uml = match.group(1)
+
     try:
         return _render_svg(uml)
     except Exception:
