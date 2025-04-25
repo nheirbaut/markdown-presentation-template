@@ -1,79 +1,48 @@
 # Markdown Presentation Template
 
-This repository is a **GitHub Template** for building HTML5 slide decks from Markdown using **Pandoc** and **reveal.js**. A pre‑configured **Dev Container** (via `.devcontainer/`) guarantees that all required tools are available in VS Code or GitHub Codespaces—no local setup hassle.
+This repository is a **GitHub Template** for creating **reveal.js** presentations from Markdown using **mkslides**. It is designed to work seamlessly with **VSCode Dev Containers** or **GitHub Codespaces**, requiring no additional setup beyond Docker and the Dev Container extension.
 
 ## Features
 
-| Make target | Description |
-|-------------|-------------|
-| `make` / `make all` | Build `presentation.html` from every `src/*.md` file |
-| `make serve` | Start a local server on <http://localhost:8000> with automatic rebuild & live‑reload |
-| `make pdf` | Export a `presentation.pdf` hand‑out via Pandoc‑Beamer |
-| `make images` | Render every `src/images/*.plantuml` / `.puml` to `images/*.png` |
-| `make clean` | Remove generated HTML, PDF & PNG artefacts |
+- **No local setup required**: All tools are pre-installed in the Dev Container.
+- **Offline PlantUML support**: Render PlantUML diagrams locally without an internet connection.
 
 ## Using this template
 
-1. On GitHub click **Use this template → Create a new repository**.
-2. Open the repository either in **GitHub Codespaces** *or* locally with **VS Code Dev Containers** (see next section).
-3. Write your slides in `src/` (one or more Markdown files).
-4. In the integrated terminal run:
+1. On GitHub, click **Use this template → Create a new repository**.
+2. Open the repository in **GitHub Codespaces** or locally in **VSCode** with the **Dev Containers** extension (see instructions below).
+3. Write your slides in the `docs/` folder (Markdown files).
+4. Use the following commands to build and preview your presentation:
 
    ```bash
-   # Build once
-   make
+   # Build the presentation in the 'out' folder
+   mkslides build -o out docs/01.md
 
-   # or edit with live preview
-   make serve
+   # Serve with live preview
+   mkslides serve docs/01.md
    ```
 
-All commands run *inside* the container, ensuring consistent tooling across all machines.
+   The live preview will be available at <http://localhost:8000>.
 
-## Dev Container environment
+## Dev Container environment
 
-The `.devcontainer/` folder installs:
+The `.devcontainer/` folder configures a containerized development environment with the following tools:
 
-- **Pandoc ≥ 3.0** (plus LaTeX for PDF export)
-- **PlantUML** + **Graphviz** (diagram generation)
-- **Python 3** with the *livereload* package
-- **entr** (file‑watching)
-- **make** and other build essentials
+- **Python 3** with the `mkslides` package for building presentations.
+- **PlantUML** and **Graphviz** for rendering diagrams.
 
-Opening the project in a supported environment automatically builds this container so every tool is ready without touching your host machine.
+### Working inside the Dev Container
 
-### Working inside the Dev Container
+| Environment           | How to open                                                                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **GitHub Codespaces** | On the repository page, click **Code → Codespaces → Create codespace**.                                                                                                   |
+| **VSCode (local)**    | 1. Install the *Dev Containers* extension.<br>2. Open the Command Palette <kbd>F1</kbd> → **Dev Containers: Open Workspace in Container…**. |
 
-| Where | How to open |
-|-------|-------------|
-| **GitHub Codespaces** | On the repo page click **Code → Codespaces → Create codespace**. A browser‑based VS Code session starts in the container. |
-| **VS Code (local)** | 1. Install the *Dev Containers* extension.<br>2. Open the Command Palette <kbd>F1</kbd> → **Dev Containers: Open Folder in Container…** and pick the repository folder.<br>3. VS Code builds the container and re‑opens the workspace inside it. |
+Once the container is built, all tools will be ready to use.
 
-## Directory structure
+## Learn more
 
-```
-.
-├── Makefile
-├── src/                # Markdown slide decks
-│   └── images/         # PlantUML sources (*.plantuml | *.puml)
-├── images/             # Auto‑generated PNGs from PlantUML
-├── styles/             # Optional custom CSS files
-├── .devcontainer/      # Dev‑container configuration
-└── presentation.html   # Built slideshow (generated)
-```
-
-## Customising the presentation
-
-- **CSS** – Drop any `*.css` into `styles/`; the Makefile passes them to Pandoc so they load after the default reveal.js theme.
-- **Pandoc options** – Edit `PANDOC_OPTS` and `PANDOC_PDF_OPTS` in the Makefile to tweak slide level, theme, Beamer options, etc.
-- **PlantUML style** – Adjust skin parameters in each `.plantuml` file or globally in `~/.plantuml`.
-
-## PDF export
-
-```bash
-make pdf   # produces presentation.pdf
-```
-
-The default uses the Beamer template; override `PANDOC_PDF_OPTS` if you need other LaTeX options.
+For detailed usage instructions, refer to the [mkslides documentation](https://github.com/MartenBE/mkslides).
 
 ## License
 
