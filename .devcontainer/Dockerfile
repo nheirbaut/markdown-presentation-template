@@ -1,10 +1,5 @@
-FROM mcr.microsoft.com/devcontainers/base:bookworm
+FROM mcr.microsoft.com/devcontainers/python:3.12
 
-RUN apt-get update \
-    && apt-get install -y \
-        plantuml \
-        python3 \
-        curl \
-        make \
-        pandoc \
+RUN apt-get update && apt-get install -y \
+    plantuml \
     && rm -rf /var/lib/apt/lists/*
